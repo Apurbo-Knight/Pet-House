@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assignment - 06</title>
+    <link rel="stylesheet" href="index.css">
+    <link
+      href="https://cdn.jsdelivr.net/npm/daisyui@4.12.12/dist/full.min.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <header >
+        <!-- nab bar*********************************************** -->
+        <nav class="md:w-10/12 m-auto py-5 flex">
+            <div class="navbar bg-base-100">
+            <div class="navbar-start">
+                <div class="dropdown">
+                <div tabindex="0" role="button" class=" lg:hidden mr-2">
+                    <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M4 6h16M4 12h8m-8 6h16"
+                    />
+                    </svg>
+                </div>
+                <ul
+                    tabindex="0"
+                    class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+                >
+                    <li><a>Home</a></li>
+                    <li><a>Shop</a></li>
+                    <li><a>Contact</a></li>
+                </ul>
+                </div>
+                <a class="flex items-center gap-1 md:gap-3">
+                <div><img class="" src="./images/logo.webp" alt="" /></div>
+                <div class="text-2xl md:text-4xl font-semibold">
+                    <p>Peddy</p>
+                </div>
+                </a>
+            </div>
+            <div class="navbar-center hidden lg:flex">
+                <ul class="menu menu-horizontal px-1">
+                <li><a>Home</a></li>
+                <li><a>Shop</a></li>
+                <li><a>Contact</a></li>
+                </ul>
+            </div>
+            <div class="navbar-end">
+                <img
+                class="size-10 md:size-14"
+                src="https://img.icons8.com/office/80/test-account.png"
+                alt=""
+                />
+            </div>
+            </div>
+        </nav>
+        <!-- hero section****************************************** -->
+        <section class="flex flex-col items-center p-3">
+            <h3 class="font-bold text-gray-500 mb-3">Bringing Families Together ❤️‍🔥 </h3>
+            <h2 class="text-4xl font-bold text-center mb-3">Your Path to Adoption <br> Starts Here</h2>
+            <p class="text-xs text-center mb-5">It is a long established fact that a reader will be distracted by the readable content of a page when looking <br> at its layout. The point of using Lorem Ipsum is that it has a.</p>
+            <a href="#mainsection"><button class=" bg-teal-700 h-10 w-24 rounded-md text-white font-semibold mb-5">View More</button></a>
+            <img src="./images/pet.webp" alt="">
+        </section>
+    </header>
+    <main>
+        <div class="text-center">
+            <h2 class="text-3xl font-semibold mb-4">Adopt  Your  Best Friend</h2>
+            <p class="text-xs mb-10">It is a long established fact that a reader will be distracted by the readable content of <br> a page when looking at its layout. The point of using Lorem Ipsum is that it has a.</p>
+        </div>
+        <!-- Category buttons ******************************************-->
+        <div id="categories" class="grid grid-cols-2 md:grid-cols-4 place-items-center mb-5">
+
+        </div>
+        <!-- Sort By Price *************************************************-->
+         <div class="flex justify-between w-10/12 m-auto">
+            <h2 class="font-bold">Best Deal For you</h2>
+            <button class="w-36 h-10 text-white bg-teal-700 rounded-md">Sort By Price</button>
+         </div>
+         <!-- display section******************************** -->
+         <div class="text-center">
+            <span id="spin" class="loading loading-spinner loading-lg"></span>
+         </div>
+         <div id="mainsection" class="md:flex xl:w-10/12 m-auto gap-3 mt-10">
+                <div class="  sm:w-9/12 m-auto "><div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3" id="display" ></div></div>
+                <div class="  sm:w-9/12 md:w-3/12 m-auto md:mx-0 "><div class="grid grid-cols-2 border-2 gap-2 p-2 rounded-md border-gray-300 " id="display2" ><p id="innerp" class="font-bold ">Choose your favorite pet. And give a like.</p></div></div>
+
+             </div>
+            
+          <!-- modal container******************************* -->
+           <div id="modal-container">
+                
+           </div>
+           <!-- countdown modal container************************** -->
+            <div id="modal-countdown">
+
+            </div>
+           
+            
+            
+            
+    </main>
+    <!-- footer************************************************************** -->
+    <footer class="bg-black text-white py-20 mt-10">
+        <div class="w-10/12 m-auto md:flex md:justify-between">
+            <div class="mb-10 md:mb-0">
+                <a class="flex items-center gap-1 md:gap-3 mb-4">
+                    <div><img class="" src="./images/logo.webp" alt="" /></div>
+                    <div class="text-2xl md:text-4xl font-semibold">
+                        <p>Peddy</p>
+                    </div>
+                </a>
+                <p class="mb-2">Location: av. Washington 165, NY CA 54003</p>
+                <p class="mb-2">Phone: +31 85 964 47 25</p>
+                <p class="mb-2">Email: info@yourdomain.com</p>
+                <p class="mb-2">Openings hours: 9.00 AM - 5.00 PM</p>
+                <div class="flex gap-5">
+                    <img src="https://img.icons8.com/?size=48&id=118497&format=png" alt="">
+                    <img src="https://img.icons8.com/?size=48&id=cMRBi0rI3iwb&format=png" alt="">
+                    <img src="https://img.icons8.com/?size=48&id=9a46bTk3awwI&format=png" alt="">
+                    <img src="https://img.icons8.com/?size=48&id=32323&format=png" alt="">
+                </div>
+            </div>
+            <div class="flex flex-col mb-10 md:mb-0">
+              <h2 class=" mb-5 md:mb-10 font-bold">Useful Links</h2>
+                <a class="mb-2 link link-hover" href="">Home</a>
+                <a class="mb-2 link link-hover" href="">About Us</a>
+                <a class="mb-2 link link-hover" href="">Animals</a>
+                <a class="mb-2 link link-hover" href="">Foundation</a>
+                <a class="mb-2 link link-hover" href="">Contact</a>
+            </div>
+            <div>
+              <h6 class="font-bold mb-6">Drop a Message</h6>
+              <input class="bg-slate-900 rounded-md h-10 w-56 px-4" type="email" placeholder="Type Your Email"><br>
+              <button class="w-56 h-10 rounded-md bg-teal-700 mt-3 font-bold">Subscribe</button>
+            </div>
+        </div>
+      </footer>
+
+    <script src="index.js"></script>
+  </body>
+</html>
+
+
