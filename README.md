@@ -1,5 +1,5 @@
 # Project Name
-## Humans Best Friend (Pet Adoption Website)
+- Humans Best Friend (Pet Adoption Website)
 # Description of The Project
 Browse through this extensive website of pets available for adoption, complete with photos and detailed profiles.
 # 6 key featurs of the project
