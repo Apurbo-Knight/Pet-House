@@ -14,67 +14,69 @@
   </head>
   <body>
     <header >
-        <!-- nab bar*********************************************** -->
+        <!-- nab bar start*********************************************** -->
         <nav class="md:w-10/12 m-auto py-5 flex">
-            <div class="navbar bg-base-100">
+          <div class="navbar bg-base-100">
             <div class="navbar-start">
-                <div class="dropdown">
+              <div class="dropdown">
                 <div tabindex="0" role="button" class=" lg:hidden mr-2">
-                    <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-5 w-5"
-                    fill="none"
+                  <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-5 w-5"
+                  fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
                     >
                     <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M4 6h16M4 12h8m-8 6h16"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M4 6h16M4 12h8m-8 6h16"
                     />
-                    </svg>
+                  </svg>
                 </div>
                 <ul
                     tabindex="0"
                     class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
-                >
+                    >
                     <li><a>Home</a></li>
                     <li><a>Shop</a></li>
                     <li><a>Contact</a></li>
-                </ul>
+                  </ul>
                 </div>
                 <a class="flex items-center gap-1 md:gap-3">
                 <div><img class="" src="./images/logo.webp" alt="" /></div>
                 <div class="text-2xl md:text-4xl font-semibold">
-                    <p>Peddy</p>
+                  <p>Peddy</p>
                 </div>
-                </a>
+              </a>
             </div>
             <div class="navbar-center hidden lg:flex">
-                <ul class="menu menu-horizontal px-1">
+              <ul class="menu menu-horizontal px-1">
                 <li><a>Home</a></li>
                 <li><a>Shop</a></li>
                 <li><a>Contact</a></li>
-                </ul>
+              </ul>
             </div>
             <div class="navbar-end">
-                <img
-                class="size-10 md:size-14"
+              <img
+              class="size-10 md:size-14"
                 src="https://img.icons8.com/office/80/test-account.png"
                 alt=""
                 />
+              </div>
             </div>
-            </div>
-        </nav>
-        <!-- hero section****************************************** -->
+          </nav>
+          <!-- nab bar end*********************************************** -->
+        <!-- hero section start****************************************** -->
         <section class="flex flex-col items-center p-3">
-            <h3 class="font-bold text-gray-500 mb-3">Bringing Families Together ❤️‍🔥 </h3>
-            <h2 class="text-4xl font-bold text-center mb-3">Your Path to Adoption <br> Starts Here</h2>
-            <p class="text-xs text-center mb-5">It is a long established fact that a reader will be distracted by the readable content of a page when looking <br> at its layout. The point of using Lorem Ipsum is that it has a.</p>
-            <a href="#mainsection"><button class=" bg-teal-700 h-10 w-24 rounded-md text-white font-semibold mb-5">View More</button></a>
-            <img src="./images/pet.webp" alt="">
+          <h3 class="font-bold text-gray-500 mb-3">Bringing Families Together ❤️‍🔥 </h3>
+          <h2 class="text-4xl font-bold text-center mb-3">Your Path to Adoption <br> Starts Here</h2>
+          <p class="text-xs text-center mb-5">It is a long established fact that a reader will be distracted by the readable content of a page when looking <br> at its layout. The point of using Lorem Ipsum is that it has a.</p>
+          <a href="#mainsection"><button class=" bg-teal-700 h-10 w-24 rounded-md text-white font-semibold mb-5">View More</button></a>
+          <img src="./images/pet.webp" alt="">
         </section>
+        <!-- hero section end****************************************** -->
     </header>
     <main id="mainsection">
       
@@ -84,11 +86,11 @@
             Find your perfect companion! Adopt your best friend today and give a
             loving home to a pet in need.
           </p>
-          <!-- Dynamic-button-container -->
+          <!-- button-container ******************************-->
           <div id="btnContainer" class=" w-full grid grid-cols-2 md:grid-cols-4 place-items-center">
   
           </div>
-        <!-- spinner-container -->
+        
         <!-- Dynamic-card-section-starts-here -->
         <div class="w-10/12 flex justify-between">
           <h3 class="text-2xl font-bold">Best Deal For you</h3>
@@ -97,7 +99,7 @@
           </button>
         </div>
         <section id="dynamicSection">
-          <!-- section-info-container -->
+          
           <!-- spinner-container -->
           <div id="spinContainer" class="w-full text-center mt-10 hidden">
             <span class="text-highlight loading loading-bars loading-lg"></span>
@@ -131,7 +133,7 @@
             </div>
           </dialog>
           <!-- adopt-button-modal -->
-          <dialog id="adoptModal" class="modal modal-bottom sm:modal-middle">
+          <dialog id="adopt" class="modal modal-bottom sm:modal-middle">
             <div class="modal-box flex flex-col items-center gap-5">
               <h3>
                 <img src="https://img.icons8.com/?size=48&id=q6BlPrJZmxHV&format=png" alt="">
