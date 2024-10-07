@@ -100,12 +100,12 @@ const displayAllData = (data) => {
                                       : "Not Available"
                                   }</p>
                                   <div class="flex items-center justify-between pt-2">
-                                    <button class="btn" onclick="likeClickHandler('${
+                                    <button class="btn btn-ghost border-teal-500 " onclick="likeClickHandler('${
                                       element.image
                                     }')"><img src="https://img.icons8.com/?size=24&id=82788&format=png"></button>
-                                    <button onclick="adoptClickHandler()" class="adoptBtn btn  font-semibold">Adopt</button>
+                                    <button onclick="adoptClickHandler()" class="adoptBtn btn btn-ghost border-teal-500  font-semibold">Adopt</button>
                                     <button onclick="detailClickHandler('${index}')" 
-                                    class="btn text-highlight  font-semibold">Details</button>
+                                    class="btn text-highlight btn-ghost border-teal-500 font-semibold">Details</button>
                                   </div>
                                 
                               </div>
@@ -141,6 +141,7 @@ const activeButton = () => {
 
 // card-like-button-clickHandler
 const likeClickHandler = async (image) => {
+  document.getElementById("innerp").classList.add("hidden");
   const imageContainer = document.getElementById("imageContainer");
   const div = document.createElement("div");
   div.innerHTML = `
