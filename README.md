@@ -14,5 +14,5 @@ Browse through this extensive website of pets available for adoption, complete w
 - Template Literals.
 - Spread Operators.
 - Block Scoped Variables (let, const).
-# Live link ot the deployed project
+# Live link of the deployed project
 - https://assignment-a6.netlify.app/
