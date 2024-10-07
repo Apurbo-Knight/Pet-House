@@ -1,227 +1,229 @@
-// fetch categories
-const loadCategories = () =>{
-    fetch(`https://openapi.programming-hero.com/api/peddy/categories`)
-    .then((res) => res.json())
-    .then((data) => displayCategories(data.categories))
-    .catch((error) => console.log(error))
-}
-
-
-const loadAllPets = () => {
-    document.getElementById("spin").classList.add("hidden");
-    fetch(`https://openapi.programming-hero.com/api/peddy/pets`)
-    .then((res) => res.json())
-    .then((data) => displayPets(data.pets))
-    .catch((error) => console.log(error))
-}
-
-const removeActiveClass = ()=>{
-    const button = document.getElementsByClassName("categoryBtn");
-    // console.log(button);
-    for(let btn of button){
-        btn.classList.remove("active");
+// fetch-all-data
+const fetchAllData = async (category) => {
+    
+    const res = await fetch(
+      `https://openapi.programming-hero.com/api/peddy${
+        category ? `/category/${category}` : "/pets"
+      }`
+    );
+    const data = await res.json();
+    if (category) {
+      displayAllData(data.data);
+    } else {
+      displayAllData(data.pets);
     }
-} 
-
-const loadPetCategories = (id) =>{
-    
-    
-    fetch(`https://openapi.programming-hero.com/api/peddy/category/${id}`)
-    .then((res) => res.json())
-    .then((data) =>{
-        removeActiveClass();
-        const activeBtn = document.getElementById(`btn-${id}`);
-        activeBtn.classList.add("active")
-        // console.log(activeBtn);
-        displayPets(data.data);
-    })
-    .catch((error) => console.log(error))
-}
-
-
-    
-
-
-// display categories
-const displayCategories = (categories) =>{
-    const categoryContainer = document.getElementById("categories");
-
-categories.forEach(item => {
-    // console.log(item);
-
-    const button = document.createElement("button");
-    // button.classList = "btn";
-    button.innerHTML = `
-    <button  id="btn-${item.category}" class= "categoryBtn" onclick = "loadPetCategories('${item.category}')">
-        <div  class=" flex items-center gap-2 btn btn-ghost border-1 border-teal-700 w-36 h-16">
-            <img class = "size-8" src="${item.category_icon}" alt="">
-            <p class = "font-bold">${item.category}</p>
-        </div>
-    </button>
-    `;
-
-    categoryContainer.append(button);
-});
-}
-
-
-
-const displayPets = (pets) => {
-    const petsContainer = document.getElementById("display");
-    petsContainer.innerHTML= " " ;
-
-    if(pets.length === 0){
+  };
+  
+  // fetch-data-for-dynamic-btn
+  const fetchBtnData = async () => {
+    const res = await fetch(
+      `https://openapi.programming-hero.com/api/peddy/categories`
+    );
+    const data = await res.json();
+    displayBtnData(data.categories);
+  };
+  
+  // display-button-data
+  const displayBtnData = (data) => {
+    const btnContainer = document.getElementById("btnContainer");
+    data.forEach((element) => {
+      const button = document.createElement("button");
+      button.innerHTML = `
+      <button onclick="categoryBtnClickHandler('${element.category}','${element.id}')" id="btn-${element.id}" class=" mb-2 categoryBtn">
+          <div  class=" flex items-center gap-2 btn btn-ghost border-1 border-teal-700 w-36 h-16">
+              <img class = "size-8" src="${element.category_icon}" alt="">
+              <p class = "font-bold">${element.category}</p>
+          </div>
+      </button>
+            `;
+      btnContainer.appendChild(button);
+    });
+  };
+  
+  // store-data-index-in-array
+  let storeData = [];
+  // global-variables
+  const cardContainer = document.getElementById("cardContainer");
+  const spinContainer = document.getElementById("spinContainer");
+  
+  // display-data-function
+  const displayAllData = (data) => {
+    storeData = data;
+    cardContainer.innerHTML = "";
+    if (data.length === 0) {
+      spinContainer.classList.add("hidden");
+      cardContainer.classList.remove("grid");
+      const div = document.createElement("div");
+      div.innerHTML = `
+           <div class="flex flex-col items-center justify-center gap-5">
+            <img src="./images/error.webp" alt="error">
+            <h3 class="text-3xl font-bold text-red-600">No Information Available</h3>
+          </div>
+          `;
+      cardContainer.appendChild(div);
+    } else {
+      cardContainer.classList.add("grid");
+      spinContainer.classList.add("hidden");
+  
+      data.forEach((element, index) => {
+        const div = document.createElement("div");
+        div.innerHTML = `
+                 <div class="p-3 rounded-md border-2 border-gray-300 ">
+                                
+                                  <div class="h-[200px] ">
+                                      <img class="h-full w-full object-cover rounded-md" src=${element.image} alt="">
+                                   </div>
+                                
+                                  <h2 class="text-2xl font-bold">${element.pet_name}</h2>                               
+                                  <p class=" font-semibold flex items-center gap-2"><img class="size-4" src="https://pic.onlinewebfonts.com/thumbnails/icons_89425.svg" alt="">Breed: ${element.breed? element.breed : "Not Available"}</p>                                                                                                                           
+                                  <p class=" font-semibold flex items-center gap-2"><img class="size-5 m-[-2px]" src="https://img.icons8.com/?size=24&id=85102&format=png" alt="">Birth: ${ element.date_of_birth? element.date_of_birth : "Not Available"}</p>
+                                  <p class=" font-semibold flex items-center gap-2"><img class="size-4 " src="https://img.icons8.com/?size=24&id=0cGxc0sNk4jD&format=png" alt="">Gender: ${ element.gender? element.gender: "Not Available"}</p>
+                                  <p class=" font-semibold flex items-center gap-2 pb-2 border-b-2 mb-3"><img class="size-5 m-[-2px]" src="https://img.icons8.com/?size=24&id=85782&format=png" alt="">Price: ${ element.price ? element.price: "Not Available"}</p>
+                                  <div class="flex items-center justify-between pt-2">
+                                    <button class="btn" onclick="likeClickHandler('${element.image}')"><img src="https://img.icons8.com/?size=24&id=82788&format=png"></button>
+                                    <button onclick="adoptClickHandler()" class="adoptBtn btn  font-semibold">Adopt</button>
+                                    <button onclick="detailClickHandler('${index}')" 
+                                    class="btn text-highlight  font-semibold">Details</button>
+                                  </div>
+                                
+                              </div>
+                `;
+  
+        cardContainer.append(div);
+      });
+    }
+  };
+  
+  // Category-wise-data-fetching
+  const categoryBtnClickHandler = (category, id) => {
+    const categoryButton = document.getElementById(`btn-${id}`);
+  
+    activeButton();
+  
+    categoryButton.classList.add("active");
+    spinContainer.classList.remove("hidden");
+    cardContainer.innerHTML = "";
+  
+    setTimeout(() => {
+      fetchAllData(category);
+    }, 2000);
+  };
+  
+  // remove-style-form-buttons
+  const activeButton = () => {
+    const buttons = document.getElementsByClassName("categoryBtn");
+    for (let button of buttons) {
+      button.classList.remove("active");
+    }
+  };
+  
+  // card-like-button-clickHandler
+  const likeClickHandler = async (image) => {
+    const imageContainer = document.getElementById("imageContainer");
+    const div = document.createElement("div");
+    div.innerHTML = `
         
-        petsContainer.classList.remove("grid");
-        petsContainer.innerHTML = `
-        <div class="max-h-screen bg-gray-100 p-10 rounded-lg flex flex-col gap-5 justify-center items-center">
-            <img src="./images/error.webp"/>
-            <p class= "font-bold text-3xl">No Information Available</p>
-        </div>
+              <img class="h-[200px] md:h-auto w-full p-1 rounded-lg" src=${image} alt="">
+          
         `;
-        return;
-    }
-    else{
-        petsContainer.classList.add("grid");
-    }
-    // console.log(pets);
-    pets.forEach(pet =>{
-        // document.getElementById("spin").classList.remove("hidden");
-        // console.log(pet);
-        const card = document.createElement("div"); 
-        card.innerHTML= `
-        <div class="p-3 rounded-md border-2 border-gray-300 ">
-            <div class="h-[200px] ">
-                <img class="h-full w-full object-cover rounded-md" src=${pet.image} alt="">
-            </div>
-            <div class="border-b-2 pb-4">
-                <h2 class="font-bold text-2xl">${pet.pet_name}</h2>
-                <P class="flex items-center gap-2"><img class="size-4" src="https://pic.onlinewebfonts.com/thumbnails/icons_89425.svg" alt="">Breed: ${pet.breed? pet.breed : pet.breed === "null"? "Not Available" : "Not Available"}</P>
-                <P class="flex items-center gap-2"><img class="size-5 m-[-2px]" src="https://img.icons8.com/?size=24&id=85102&format=png" alt="">Birth: ${pet.date_of_birth? pet.date_of_birth: pet.date_of_birth === "null" ? "Not Available":"Not Available"}</P>
-                <P class="flex items-center gap-2"><img class="size-4 " src="https://img.icons8.com/?size=24&id=0cGxc0sNk4jD&format=png" alt="">Gender: ${pet.gender? pet.gender : pet.gender ==="null" ? "Not Available" : "Not Available"}</P>
-                <P class="flex items-center gap-2"><img class="size-5 m-[-2px]" src="https://img.icons8.com/?size=24&id=85782&format=png" alt="">Price: ${pet.price? pet.price :pet.price === "null" ? "Not Available" : "Not Available"}</P>
-            </div>
-            <div class="flex justify-between mt-3">
-                <button onclick = "handleLike('${pet.image}')"class="btn btn-ghost border-1 border-teal-700"><img src="https://img.icons8.com/?size=24&id=82788&format=png" alt=""></button>
-                <button  onclick = "adopt()"  class="btn btn-ghost border-1 border-teal-700">Adopt</button>
-                <button onclick = "petDetails('${pet.petId}')"class="btn btn-ghost border-1 border-teal-700">Details</button>
-            </div>
-        </div>
-        `;
-
-        petsContainer.append(card);
-    })
-}
-// 888888888888888888888888888888888888888888888888888888******************************
-const adopt = () =>{
-   const countdownModal = document.getElementById("modal-countdown");
-
-   
-
-   countdownModal.innerHTML=`
-        <dialog id="my_modal_2" class="modal">
-            <div class="modal-box">
-                <div class="flex justify-center p-5">
-                    <img src="https://img.icons8.com/?size=48&id=q6BlPrJZmxHV&format=png">
-                </div>
-                <h2 class="text-center font-bold text-3xl mb-4">Congratulation</h2>
-                <h2 class="text-center mb-4">Adoption Process is start For Your Pet</h2>
-                <p id="countdown" class="text-center font-bold text-5xl mb-5">3</p>
+    imageContainer.appendChild(div);
+  };
+  
+  // details-button-clickHandler
+  
+  const detailClickHandler = (index) => {
+    const element = storeData[index];
+    const modalContainer = document.getElementById("modalContainer");
+    modalContainer.innerHTML = "";
+    const div = document.createElement("div");
+    div.innerHTML = `
+        <div class="card w-full ">
+                            
+                              <img
+                                src=${element.image}
+                                class="rounded-xl" />
+                           
+                            <div class="">
+                              <h2 class="text-2xl font-bold"> 
+                              ${element.pet_name}</h2>
+                              <p class="flex items-center gap-2 font-semibold"><img class="size-4" src="https://pic.onlinewebfonts.com/thumbnails/icons_89425.svg" alt="">Breed:  
+                              ${
+                                element.breed ? element.breed : "Not Available"
+                              }</p>
+                              <p class="flex items-center gap-2 font-semibold"><img class="size-5 m-[-2px]" src="https://img.icons8.com/?size=24&id=85102&format=png" alt="">Birth: 
+                               ${
+                                 element.date_of_birth
+                                   ? element.date_of_birth
+                                   : "Not Available"
+                               }</p>
+                              <p class="flex items-center gap-2 font-semibold"><img class="size-4 " src="https://img.icons8.com/?size=24&id=0cGxc0sNk4jD&format=png" alt="">Gender:  
+                              ${
+                                element.gender ? element.gender : "Not Available"
+                              }</p>
+                              <p class="flex items-center gap-2 font-semibold"><img class="size-5 m-[-2px]" src="https://img.icons8.com/?size=24&id=85782&format=png" alt="">Price: 
+                               ${
+                                 element.price ? element.price : "Not Available"
+                               }</p>
+                                
+                               <div>
+                               <h3 class="text-3xl font-bold border-t-2 my-2">Details Information</h3>
+                               <p class="font-semibold ">${
+                                 element.pet_details
+                               }</p>
+                               </div>
+                               <div class="modal-action">
+                      <form method="dialog">
+                        <div class="w-[465px]">
+                               <button class="btn w-full bg-teal-700">Close</button>
+                        </div>
                         
-            </div>
-        </dialog>
-   `;
-     
-   
-   
-    const countdownDisplay = document.getElementById('countdown');
-    let countdown = 3;
-
-    my_modal_2.showModal();
-    
-    const countdownInterval = setInterval(() => {
-        countdown--;
-        countdownDisplay.textContent = countdown;
-
-        if (countdown <= 0) {
-            clearInterval(countdownInterval);
-            countdownModal.innerHTML=``;
-        }
+                      </form>
+                    </div>
+                            </div>
+                          </div>
+        `;
+    modalContainer.append(div);
+    my_modal_1.showModal();
+  };
+  
+  //adopt-click-handler
+  
+  const adoptClickHandler = () => {
+    const countDown = document.getElementById("countDown");
+    // countdown-for-adopt-button
+    countDown.textContent = "";
+    let count = 4;
+    const interId = setInterval(() => {
+      count--;
+      countDown.textContent = count;
+      if (count == 0) {
+        clearInterval(interId);
+        countDown.textContent = "Done";
+        adoptModal.close();
+      }
     }, 1000);
-
-} 
-    // Show the message
-
-
-const handleLike = (image)=>{
-    const imageContainer = document.getElementById("display2");
-    
-   const div = document.createElement("div");
-
-    div.innerHTML=`
-        
-            <img class="rounded-md" src="${image}" alt="">
-        
-    `;
-    imageContainer.append(div)
-    document.getElementById("innerp").classList.add("hidden");
-    
-}
-
-
-const petDetails = async(id) =>{
-    const response = await fetch(`https://openapi.programming-hero.com/api/peddy/pet/${id}`)
-    const data = await response.json();
- 
- const {image,pet_name, breed, gender, date_of_birth, price, vaccinated_status,pet_details} = data.petData;
-
- const modalContainer = document.getElementById("modal-container");
-
- modalContainer.innerHTML=`
-<dialog id="my_modal_1" class="modal">
-  <div class="modal-box">
-   <img class = "w-full rounded-md" src=${image} alt="">
-     <h2 class="font-bold text-2xl">${pet_name}</h2>
-     <P class="flex items-center gap-2"><img class="size-4" src="https://pic.onlinewebfonts.com/thumbnails/icons_89425.svg" alt="">Breed: ${breed? breed : breed === "null"? "Not Available" : "Not Available"}</P>
-     <P class="flex items-center gap-2"><img class="size-5 m-[-2px]" src="https://img.icons8.com/?size=24&id=85102&format=png" alt="">Birth: ${date_of_birth? date_of_birth: date_of_birth === "null" ? "Not Available":"Not Available"}</P>
-     <P class="flex items-center gap-2"><img class="size-4 " src="https://img.icons8.com/?size=24&id=0cGxc0sNk4jD&format=png" alt="">Gender: ${gender? gender : gender ==="null" ? "Not Available" : "Not Available"}</P>
-     <P class="flex items-center gap-2"><img class="size-5 m-[-2px]" src="https://img.icons8.com/?size=24&id=85782&format=png" alt="">Price: ${price? price :price === "null" ? "Not Available" : "Not Available"}</P>
-     <P class="flex items-center gap-2 border-b-2 pb-4 mb-4"><img class="size-5 m-[-2px]" src="https://img.icons8.com/?size=48&id=qQO6lVjT5coA&format=png" alt="">Vaccinated Status: ${vaccinated_status? vaccinated_status :vaccinated_status === "null" ? "Not Available" : "Not Available"}</P>
-     <div>
-        <h2 class="font-bold">Details Information</h2>
-        <p>${pet_details}</p>
-     </div>
-    <div class="modal-action">
-      <form method="dialog">
-        <div class = " rounded-md w-[465px] bg-teal-700">
-            <button class="text-white h-10  w-full">Close</button>
-        </div>
-      </form>
-    </div>
-  </div>
-</dialog>
- `;
-
-
- my_modal_1.showModal()
-}
-
-
-
-loadCategories();
-// loadAllPets();
-loadPetCategories();
-const loading = () =>{
-    setTimeout(function (){
-        loadAllPets()
-    },2000)
-}
-loading();
-
-// document.getElementById(`btn-${item.category}`).addEventListener(click,function(){
-//     document.getElementById("spin").classList.remove("hidden");
-
-//     setTimeout(function(){
-//         loadPetCategories(id)
-//     },3000)
-// });
+    adoptModal.showModal();
+  };
+  
+  // sortedData-function
+  const sortedData = () => {
+    const sortedData = [...storeData].sort((a, b) => {
+      const priceA = a.price ? parseFloat(a.price) : 0;
+      const priceB = b.price ? parseFloat(b.price) : 0;
+      return priceB - priceA;
+    });
+    spinContainer.classList.remove("hidden");
+    cardContainer.innerHTML = "";
+    setTimeout(() => {
+      displayAllData(sortedData);
+    }, 2000);
+  };
+  fetchBtnData();
+  
+  const loading = () =>{
+      spinContainer.classList.remove("hidden");
+      setTimeout(function (){
+          fetchAllData();  
+      },2000)
+  }
+  loading();
