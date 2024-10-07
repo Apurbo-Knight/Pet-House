@@ -141,7 +141,7 @@ const activeButton = () => {
 
 // card-like-button-clickHandler
 const likeClickHandler = async (image) => {
-  document.getElementById("innerp").classList.add("hidden");
+  document.getElementById("hide").classList.add("hidden");
   const imageContainer = document.getElementById("imageContainer");
   const div = document.createElement("div");
   div.innerHTML = `
