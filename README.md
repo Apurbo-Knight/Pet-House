@@ -15,4 +15,4 @@ Browse through this extensive website of pets available for adoption, complete w
 - Spread Operators.
 - Block Scoped Variables (let, const).
 # Live link of the deployed project
-- https://assignment-a6.netlify.app/
+- https://pet-house11.netlify.app
